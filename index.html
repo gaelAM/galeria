@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería de Fotos</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="img/icono.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <h1>GALERIA DE IMAGENES</h1>
+
+<div class="gallery">
+  <img src="img/imagen1.jpg" alt="Foto 1" onclick="openModal(this);">
+  <img src="img/imagen2.jpg" alt="Foto 2" onclick="openModal(this);">
+  <img src="img/imagen3.jpg" alt="Foto 1" onclick="openModal(this);">
+  <img src="img/imagen5.jpg" alt="Foto 2" onclick="openModal(this);">
+  <img src="img/imagen6.jpg" alt="Foto 1" onclick="openModal(this);">
+  <img src="img/imagen7.jpg" alt="Foto 2" onclick="openModal(this);">
+  <!-- Más imágenes aquí -->
+</div>
+
+<div id="myModal" class="modal">
+  <span class="close" onclick="closeModal()">×</span>
+  <img class="modal-content" id="img01">
+  <!-- Botones para navegar -->
+  <button class="nav-button" onclick="navigate(-1)">❮ Anterior</button>
+  <button class="nav-button" onclick="navigate(1)">Siguiente ❯</button>
+</div>
+
+<script>
+var currentIndex = 0; // Índice de la imagen actual
+var images = document.querySelectorAll('.gallery img'); // Todas las imágenes de la galería
+
+function openModal(img) {
+  var modal = document.getElementById('myModal');
+  var modalImg = document.getElementById("img01");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+  currentIndex = Array.from(images).indexOf(img); // Actualizar el índice actual
+}
+
+function closeModal() {
+  var modal = document.getElementById('myModal');
+  modal.style.display = "none";
+}
+
+function navigate(step) {
+  currentIndex = (currentIndex + step + images.length) % images.length; // Calcular el nuevo índice
+  var newImg = images[currentIndex];
+  openModal(newImg); // Abrir la nueva imagen
+}
+</script>
+
+</body>
+</html>
